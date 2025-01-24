@@ -13,6 +13,7 @@ class Settings(BaseSettings):
 
     # Secret key for the application
     ANTHROPIC_API_KEY: SecretStr
+    TAVILY_API_KEY: SecretStr
 
     # General settings
     APP_NAME: str = "Langgraph Template"
