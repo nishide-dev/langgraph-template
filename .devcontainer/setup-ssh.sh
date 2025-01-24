@@ -13,10 +13,11 @@ sudo mkdir -p /run/sshd
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 
-# Copy authorized_keys from mounted .ssh directory
-if [ -f "${WORKSPACE_ROOT}/.devcontainer/.ssh/authorized_keys" ]; then
-    cp "${WORKSPACE_ROOT}/.devcontainer/.ssh/authorized_keys" ~/.ssh/
-    chmod 600 ~/.ssh/authorized_keys
+# Copy all SSH files from mounted .ssh directory
+if [ -d "${WORKSPACE_ROOT}/.devcontainer/.ssh" ]; then
+    cp "${WORKSPACE_ROOT}/.devcontainer/.ssh/"* ~/.ssh/ 2>/dev/null || true
+    chmod 600 ~/.ssh/*
+    chmod 644 ~/.ssh/*.pub ~/.ssh/known_hosts 2>/dev/null || true
 fi
 
 # Start SSH daemon
