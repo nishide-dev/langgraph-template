@@ -8,6 +8,12 @@
         "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
         "ghcr.io/dhoeric/features/hadolint:1": {}
     },
+    "postCreateCommand": "chmod +x .devcontainer/setup-ssh.sh && .devcontainer/setup-ssh.sh",
+    "forwardPorts": [2229],
+    "appPort": ["2229:22"],
+    "remoteEnv": {
+        "WORKSPACE_ROOT": "${containerWorkspaceFolder}"
+    },
     "customizations": {
         "vscode": {
             "extensions": [
@@ -27,7 +33,8 @@
                 "yzhang.markdown-all-in-one",
                 "mhutchie.git-graph",
                 "GitHub.copilot",
-                "seatonjiang.gitmoji-vscode"
+                "seatonjiang.gitmoji-vscode",
+                "Codeium.windsurfPyright"
             ],
             "settings": {
                 "python.defaultInterpreterPath": "/opt/rye/shims/python",
