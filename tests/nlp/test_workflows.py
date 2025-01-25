@@ -12,9 +12,9 @@ def llm_anthropic() -> LLMAnthropic:
 
 
 def test_chatbot_workflow(llm_anthropic: LLMAnthropic) -> None:
-    workflow = chatbot_workflow(llm_anthropic)
-    assert workflow is not None
-    response = workflow.invoke({"messages": [{"role": "user", "content": "Hello"}]})
+    graph = chatbot_workflow(llm_anthropic)
+    assert graph is not None
+    response = graph.invoke({"messages": [{"role": "user", "content": "Hello"}]})
     assert response is not None
     assert isinstance(response, dict)
     assert isinstance(response["messages"], list)
