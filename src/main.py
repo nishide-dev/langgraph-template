@@ -7,20 +7,22 @@ from langgraph.graph.state import CompiledStateGraph
 # internal imports
 sys.path.append(str(Path(__file__).parent.parent))
 from src.nlp.llm import LLMAnthropic
+from src.nlp.tools import TavilySearchResultsTool
 from src.nlp.workflows import chatbot_workflow
 
 
 def stream_graph_updates(user_input: str, graph: CompiledStateGraph) -> None:
     for event in graph.stream({"messages": [{"role": "user", "content": user_input}]}):
         for value in event.values():
-            print("Assistant:", value["messages"].content)  # noqa: T201 # ["messages"][-1]
+            print("Assistant:", value["messages"][-1].content)  # noqa: T201
 
 
 # main
 def main() -> None:
     llm = LLMAnthropic()
-    graph = chatbot_workflow(llm)
-    graph.invoke({"messages": [{"role": "user", "content": "Hello"}]})
+    tools = [TavilySearchResultsTool()]
+    llm_with_tools = llm.bind_tools(tools)
+    graph = chatbot_workflow(llm_with_tools, tools)
 
     while True:
         try:

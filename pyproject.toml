@@ -11,6 +11,7 @@ dependencies = [
     "langgraph>=0.2.60",
     "pydantic-settings>=2.7.1",
     "langchain-anthropic>=0.3.4",
+    "langchain-community>=0.3.15",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
@@ -26,6 +27,7 @@ dev-dependencies = [
     "pre-commit>=3.7.0",
     "ruff>=0.3.5",
     "pytest-asyncio>=0.23.5",
+    "grandalf>=0.8",
 ]
 
 [tool.hatch.metadata]
